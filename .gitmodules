@@ -1,0 +1,3 @@
+[submodule "class-central"]
+	path = class-central
+	url = https://github.com/dhawalhshah/class-central.git

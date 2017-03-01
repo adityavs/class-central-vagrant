@@ -1,0 +1,6 @@
+.idea
+.vagrant
+puphpet/config-custom.yaml
+
+var/dump.sql
+var/parameters.yml

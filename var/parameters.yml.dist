@@ -1,0 +1,110 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            en
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    adminpass: Test1234
+
+    addthis_pubid: ~
+    ganalytics_id: ~
+    ga_optimize_id: ~
+    fb_admins: ~
+    plusPageUrl: ~
+    baseurl: ~
+    sphinx_index: ~
+    addthisevent: ~
+
+    mailgun_api_key: ~
+    mailgun_domain_name: ~
+
+    rackspace_cdn_base_url: https://55139331861ea7bae64a-6ce72092dadc665ec81e45fed9e98c91.ssl.cf2.rackcdn.com/assets/
+    prod_assets_cdn_url: ~
+
+    #test configuration
+    test_database_driver:   pdo_mysql
+    test_database_host:     127.0.0.1
+    test_database_port:     ~
+    test_database_name:     symfony
+    test_database_user:     root
+    test_database_password: ~
+
+    test_mailgun_api_key: ~
+    test_mailgun_domain_name: ~
+
+    #swiftype
+    swiftype_engine_slug: ~
+    swiftype_engine_key: ~
+    swiftype_api_key: ~
+
+    #memcache
+    session_memcached_host: localhost
+    session_memcached_port: 11211
+    session_memcached_expire: 2592000
+
+    #fb app details
+    fb_app_id: ~
+    fb_secret: ~
+
+    #kimonolabs
+    kimono_api_key: ~
+
+    #clicky
+    clicky_site_id: ~
+
+    #elastic search
+    es_index_name: ~
+    es_scheduler_index_name: ~
+
+    # Kuber setting:
+    kuber_aws_access_key: ~
+    kuber_aws_access_secret: ~
+    kuber_bucket_name: ~
+    kuber_base_url: ~
+
+    # mashape api key
+    mashape_api_key : ~
+    
+    #embedly api key
+    embedly_api_key: ~	
+    
+    #sumo site id
+    sumo_site_id: ~
+
+    # Slack Webhook
+    slack_webhook: ~
+    
+    # Elasticsearch	
+    es_host: 'http://localhost'
+
+    # Inspectlet
+    inspectlet_id: ~
+    
+    # Keen
+    keen_project_id : ~
+    keen_write_key : ~
+    keen_user_stats_project_id : ~
+    keen_user_stats_master_key : ~
+    keen_user_stats_write_key: ~
+    keen_user_stats_read_key: ~
+
+    test_email: ~
+    segment_write_key: ~
+
+    coursera_url: ~
+    edx_url: ~
+    udemy_client_id: ~
+    udemy_client_secret: ~
+    google_auth_client_id: ~
+    edx_api_client_id: ~
+    edx_api_client_secret: ~
