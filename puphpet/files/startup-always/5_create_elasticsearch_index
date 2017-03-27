@@ -1,5 +1,0 @@
-php app/console classcentral:elasticsearch:index directory create
-php app/console classcentral:elasticsearch:index scheduler create
-php app/console classcentral:elasticsearch:mapping directory
-php app/console classcentral:elasticsearch:mapping scheduler
-./reindex.sh
