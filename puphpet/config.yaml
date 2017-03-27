@@ -19,13 +19,13 @@ vagrantfile:
                         check_guest_tools: 0
                         update_guest_tools: 0
                 machines:
-                    vflm_0n0q2hlker13:
+                    vflm_v4fowe4fvur2:
                         id: class-app
                         hostname: class-app.vagrant
                         network:
                             private_network: 192.168.50.100
                             forwarded_port:
-                                vflmnfp_7gqijwh29hx5:
+                                vflmnfp_18l7umwbkrri:
                                     host: '8080'
                                     guest: '80'
                         memory: '1024'
@@ -40,7 +40,9 @@ vagrantfile:
                     - '--verbose'
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
         synced_folder:
-            vflsf_xof1iu6krad9:
+            vflsf_jeotaqavgs6e:
+                owner: www-data
+                group: www-data
                 source: ./class-central
                 target: /var/www
                 sync_type: nfs
@@ -60,8 +62,6 @@ vagrantfile:
                         - .vagrant/
                         - .git/
                     auto: 'true'
-                owner: www-data
-                group: www-data
         usable_port_range:
             start: 10200
             stop: 10500
@@ -86,7 +86,8 @@ vagrantfile:
         no_proxy: ''
 server:
     install: '1'
-    packages: {  }
+    packages:
+        - default-jre
 users_groups:
     install: '1'
     groups: {  }
@@ -118,34 +119,92 @@ nginx:
         names_hash_bucket_size: 128
     upstreams: {  }
     vhosts:
-        nxv_vp3ikqvk8bu6:
+        nxv_6dmjp5qekbe6:
             server_name: class-central.dev
             server_aliases:
                 - www.class-central.dev
-            www_root: /var/www
+            www_root: /var/www/
             listen_port: '80'
             client_max_body_size: 1m
             ssl: '0'
-            ssl_cert: ''
-            ssl_key: ''
-            ssl_port: '443'
-            ssl_protocols: ''
-            ssl_ciphers: ''
-            rewrite_to_https: '1'
-            spdy: '1'
             locations:
-                nxvl_v41qt5ekgp9v:
+                nxvl_5x6t55vwb0x4:
                     www_root: /var/www/web
                     location: /
+                    autoindex: 'off'
+                    internal: 'false'
+                    index_files:
+                        - index.php
+                    try_files:
+                        - $uri
+                        - $uri/
+                        - /index.php$is_args$args
+                        - /app.php$is_args$args
+                    fastcgi: '127.0.0.1:9000'
+                    fastcgi_index: index.php
+                    fastcgi_split_path: '^(.+\.php)(/.*)$'
+                    fast_cgi_params_extra:
+                        - 'SCRIPT_FILENAME $document_root$fastcgi_script_name'
+                    set:
+                        - '$path_info $fastcgi_path_info'
+                    proxy: ''
+                    proxy_redirect: ''
+                nxvl_fkeuvt1au5l5:
+                    www_root: /var/www/web
+                    location: '~ ^/(app_dev|config)\.php(/|$)'
+                    autoindex: 'off'
+                    internal: 'false'
                     index_files:
                         - app_dev.php
                     try_files:
                         - $uri
                         - $uri/
-                        - '/app_dev.php?$query_string'
+                        - /app_dev.php$is_args$args
                     fastcgi: '127.0.0.1:9000'
                     fastcgi_index: app_dev.php
-                    fastcgi_split_path: ^(.+\.php)(/.+)$
+                    fastcgi_split_path: '^(.+\.php)(/.*)$'
+                    fast_cgi_params_extra:
+                        - 'SCRIPT_FILENAME $document_root$fastcgi_script_name'
+                        - 'APP_ENV dev'
+                    set:
+                        - '$path_info $fastcgi_path_info'
+                    proxy: ''
+                    proxy_redirect: ''
+                nxvl_hhvl2bmp83u0:
+                    www_root: /var/www/web
+                    location: '~ ^/app\.php(/|$)'
+                    autoindex: 'off'
+                    internal: 'false'
+                    index_files:
+                        - app.php
+                    try_files:
+                        - $uri
+                        - $uri/
+                        - /app.php$is_args$args
+                    fastcgi: '127.0.0.1:9000'
+                    fastcgi_index: app.php
+                    fastcgi_split_path: '^(.+\.php)(/.*)$'
+                    fast_cgi_params_extra:
+                        - 'SCRIPT_FILENAME $document_root$fastcgi_script_name'
+                        - 'APP_ENV prod'
+                    set:
+                        - '$path_info $fastcgi_path_info'
+                    proxy: ''
+                    proxy_redirect: ''
+                nxvl_54rvxi6lvhd7:
+                    www_root: /var/www/web
+                    location: '~ ^/index\.php(/|$)'
+                    autoindex: 'off'
+                    internal: 'false'
+                    index_files:
+                        - index.php
+                    try_files:
+                        - $uri
+                        - $uri/
+                        - /index.php$is_args$args
+                    fastcgi: '127.0.0.1:9000'
+                    fastcgi_index: index.php
+                    fastcgi_split_path: '^(.+\.php)(/.*)$'
                     fast_cgi_params_extra:
                         - 'SCRIPT_FILENAME $document_root$fastcgi_script_name'
                     set:
@@ -167,7 +226,7 @@ apache:
         - proxy_fcgi
         - rewrite
     vhosts:
-        av_5ix72dui5h2s:
+        av_bmi2ykbzkwqz:
             servername: awesome.dev
             serveraliases:
                 - www.awesome.dev
@@ -177,14 +236,14 @@ apache:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
             custom_fragment: ''
             ssl: '0'
-            ssl_cert: ''
-            ssl_key: ''
-            ssl_chain: ''
-            ssl_certs_dir: ''
+            ssl_cert: LETSENCRYPT
+            ssl_key: LETSENCRYPT
+            ssl_chain: LETSENCRYPT
+            ssl_certs_dir: LETSENCRYPT
             ssl_protocol: ''
             ssl_cipher: ''
             directories:
-                avd_sicopl08tz37:
+                avd_m1geqdd8wx2d:
                     path: /var/www/awesome/web
                     directoryindex: 'index.php app.dev'
                     options:
@@ -198,21 +257,21 @@ apache:
                     custom_fragment: ''
                     provider: directory
             files_match:
-                avfm_9hw5t9hpu53n:
+                avfm_ka40i97wbb8w:
                     path: (app_dev|config)\.php$
                     sethandler: 'proxy:fcgi://127.0.0.1:9000'
                     setenv:
                         - 'APP_ENV dev'
                     custom_fragment: ''
                     provider: filesmatch
-                avfm_l1n3cv0r8pso:
+                avfm_3nnr52qkp2ki:
                     path: app\.php$
                     sethandler: 'proxy:fcgi://127.0.0.1:9000'
                     setenv:
                         - 'APP_ENV prod'
                     custom_fragment: ''
                     provider: filesmatch
-                avfm_vdu31itutxp0:
+                avfm_l8isytfbrcqb:
                     path: \.php$
                     sethandler: 'proxy:fcgi://127.0.0.1:9000'
                     custom_fragment: ''
@@ -236,6 +295,7 @@ php:
             - curl
             - memcached
             - zip
+            - apc
         pear: {  }
         pecl: {  }
     ini:
@@ -246,7 +306,7 @@ php:
     fpm_ini:
         error_log: /var/log/php-fpm.log
     fpm_pools:
-        phpfp_7r86n5w6su5b:
+        phpfp_ri2tc6qma1cf:
             ini:
                 prefix: www
                 listen: '127.0.0.1:9000'
@@ -289,7 +349,7 @@ drush:
 ruby:
     install: '1'
     versions:
-        rv_smi1bzjfcbn1:
+        rv_hw8wcrqq26ga:
             default: '1'
             bundler: '1'
             version: 2.3.1
@@ -306,40 +366,15 @@ nodejs:
     settings:
         version: '6'
     npm_packages: {  }
-hhvm:
-    install: '0'
-    composer: '1'
-    composer_home: ''
-    settings: {  }
-    server_ini:
-        hhvm.server.host: 127.0.0.1
-        hhvm.server.port: '9000'
-        hhvm.log.use_log_file: '1'
-        hhvm.log.file: /var/log/hhvm/error.log
-    php_ini:
-        display_errors: 'On'
-        error_reporting: '-1'
-        date.timezone: UTC
 mariadb:
     install: '0'
     settings:
         version: '10.1'
-        root_password: '123'
+        root_password: 123
         override_options: {  }
-    users:
-        mariadbnu_0gm9hfsq3s1s:
-            name: dbuser
-            password: '123'
-    databases:
-        mariadbnd_wwzlgrc119er:
-            name: dbname
-            sql: ''
-    grants:
-        mariadbng_4jjovfxs5fpn:
-            user: dbuser
-            table: '*.*'
-            privileges:
-                - ALL
+    users: {  }
+    databases: {  }
+    grants: {  }
 mysql:
     install: '1'
     settings:
@@ -347,15 +382,15 @@ mysql:
         root_password: ClassCentralNotSecretPass
         override_options: {  }
     users:
-        mysqlnu_umxuskg1lg4o:
+        mysqlnu_ps4g36x7tpgt:
             name: user
             password: ClassCentralNotSecretPass
     databases:
-        mysqlnd_wa86ty4r094g:
+        mysqlnd_2adhxegnng9m:
             name: class_cental
             sql: ''
     grants:
-        mysqlng_06gcgngmsmtf:
+        mysqlng_wr8u5ip2n3te:
             user: user
             table: '*.*'
             privileges:
