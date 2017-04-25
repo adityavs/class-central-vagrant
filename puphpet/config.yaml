@@ -41,8 +41,8 @@ vagrantfile:
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
         synced_folder:
             vflsf_41oizqo5it9a:
-                owner: root
-                group: root
+                owner: www-data
+                group: www-data
                 source: ./class-central
                 target: /var/www
                 sync_type: nfs
@@ -291,8 +291,8 @@ php:
                 prefix: www
                 listen: '127.0.0.1:9000'
                 security.limit_extensions: .php
-                user: root
-                group: root
+                user: www-data
+                group: www-data
     composer: '1'
     composer_home: ''
 xdebug:
