@@ -126,7 +126,10 @@ nginx:
             www_root: /var/www/
             listen_port: '80'
             client_max_body_size: 1m
-            ssl: '0'
+            ssl: '1'
+            ssl_cert: ''
+            ssl_key: ''
+            ssl_port: ''
             locations:
                 nxvl_ku5a530hnppg:
                     www_root: /var/www/web
@@ -276,6 +279,7 @@ php:
             - memcached
             - zip
             - apc
+            - imagick
         pear: {  }
         pecl: {  }
     ini:
