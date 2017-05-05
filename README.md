@@ -1,10 +1,10 @@
 
-##Requirements:
+## Requirements:
 
 * [VirtualBox 5.0.26](https://www.virtualbox.org/wiki/Downloads) 
 * [Vagrant 1.8.6](https://www.vagrantup.com/docs/installation/)
 
-##Installation:
+## Installation:
 
 * Clone this repository
 * Run `git sumbmodule init && git submodule update`
