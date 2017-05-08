@@ -13,7 +13,7 @@ vagrantfile:
                             natdnshostresolver1: false
                         showgui: 0
                     vmware:
-                        numvcpus: 1
+                        numvcpus: 2
                     parallels:
                         linked_clone: 0
                         check_guest_tools: 0
@@ -138,14 +138,14 @@ nginx:
                     autoindex: 'off'
                     internal: 'false'
                     index_files:
-                        - app_dev.php
+                        - app.php
                     try_files:
                         - $uri
                         - $uri/
                         - /app_dev.php$is_args$args
-                    fastcgi: '127.0.0.1:9000'
-                    fastcgi_index: app_dev.php
-                    fastcgi_split_path: '^(.+\.php)(/.*)$'
+                    fastcgi: ''
+                    fastcgi_index: ''
+                    fastcgi_split_path: ''
                     fast_cgi_params_extra:
                         - 'SCRIPT_FILENAME $document_root$fastcgi_script_name'
                         - 'APP_ENV dev'
@@ -158,8 +158,6 @@ nginx:
                     location: '~ ^/(app_dev|config)\.php(/|$)'
                     autoindex: 'off'
                     internal: 'false'
-                    index_files:
-                        - app_dev.php
                     try_files:
                         - $uri
                         - $uri/
@@ -174,13 +172,11 @@ nginx:
                         - '$path_info $fastcgi_path_info'
                     proxy: ''
                     proxy_redirect: ''
-                nxvl_nkhgib0y26b7:
+                nxvl_u1ypd1660nwy:
                     www_root: /var/www/web
                     location: '~ ^/app\.php(/|$)'
                     autoindex: 'off'
                     internal: 'false'
-                    index_files:
-                        - app.php
                     try_files:
                         - $uri
                         - $uri/
