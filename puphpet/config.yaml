@@ -88,6 +88,7 @@ server:
     install: '1'
     packages:
         - default-jre
+        - memcached
 users_groups:
     install: '1'
     groups: {  }
